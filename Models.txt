@@ -1,0 +1,232 @@
+===============================================================================
+  usersync :: Whisper model catalog
+===============================================================================
+
+How to install a model:
+  1. Pick one from the list below (size + use-case will help).
+  2. Click the download link.
+  3. Save the .bin file into the "models" folder next to usersync.exe.
+  4. Restart usersync (or click the refresh button next to the Model
+     dropdown). The new model will appear in the dropdown.
+
+All models come from the official whisper.cpp repo on Hugging Face:
+  https://huggingface.co/ggerganov/whisper.cpp
+
+-------------------------------------------------------------------------------
+  TIER 0 - JUST FOR TESTING THE PIPELINE
+-------------------------------------------------------------------------------
+
+ggml-tiny.bin                                                          (~75 MB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin
+  Quality:  Bad. Words will be wrong, timing will be loose.
+  Speed:    Blink-and-it's-done, even on CPU.
+  When:     You just want to confirm the program runs end-to-end. Pair
+            with the "Lazy" preset.
+
+ggml-tiny.en.bin                                                       (~75 MB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.en.bin
+  Quality:  Same as tiny, but English-only -- slightly better at English.
+  When:     Testing with English audio.
+
+-------------------------------------------------------------------------------
+  TIER 1 - QUICK DRAFTS
+-------------------------------------------------------------------------------
+
+ggml-base.bin                                                         (~140 MB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin
+  Quality:  Mediocre. Catches most words on clean studio recordings.
+            Struggles with mumbling, music, accents.
+  Speed:    Very fast.
+  When:     Spoken-word audio with no music underneath. Skip for real songs.
+
+ggml-base.en.bin                                                      (~140 MB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin
+  Quality:  Slightly better than base on English audio.
+  When:     English-only quick draft of clean speech.
+
+ggml-small.bin                                                        (~466 MB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin
+  Quality:  Decent for clean speech, OK on music.
+  Speed:    Fast on CPU, very fast on GPU.
+  When:     Pair with the "Low" preset for a usable quick draft of a song.
+
+ggml-small.en.bin                                                     (~466 MB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.en.bin
+  When:     English-only equivalent of small.
+
+-------------------------------------------------------------------------------
+  TIER 2 - GENERAL USE
+-------------------------------------------------------------------------------
+
+ggml-medium.bin                                                       (~1.5 GB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.bin
+  Quality:  Good on most music. Will get most lyrics right.
+  Speed:    Slow on CPU (multiple minutes per song); fast on GPU.
+  When:     Solid general-purpose pick if large-turbo is too big for you.
+
+ggml-medium.en.bin                                                    (~1.5 GB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.en.bin
+  When:     English-only, slightly better than medium on English.
+
+-------------------------------------------------------------------------------
+  TIER 3 - RECOMMENDED FOR LYRICS  *** USE ONE OF THESE ***
+-------------------------------------------------------------------------------
+
+ggml-large-v3-turbo.bin                                               (~1.6 GB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin
+  Quality:  Near-large-v3 accuracy at ~4x the speed. Excellent on music.
+  Speed:    Fast on GPU, still tolerable on CPU.
+  When:     DEFAULT CHOICE. The "Medium" and "High" presets target this model.
+            If you only download ONE model, make it this one.
+
+ggml-large-v3.bin                                                     (~3.1 GB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3.bin
+  Quality:  The most accurate of all whisper models. Catches mumbles,
+            ad-libs, multilingual lyrics, the works.
+  Speed:    Slow on CPU (~5x slower than turbo), fast on a real GPU.
+  When:     "Perfect" preset uses this. Worth it for keepers; overkill for
+            quick jobs. Pairs well with a high refinement-pass count.
+
+ggml-large-v2.bin                                                     (~3.1 GB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v2.bin
+  When:     Slightly weaker than v3 on most material but sometimes better on
+            niche languages. Only download if v3 disappoints you.
+
+ggml-large-v1.bin                                                     (~3.1 GB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v1.bin
+  When:     Legacy. Skip unless reproducing old results.
+
+-------------------------------------------------------------------------------
+  TIER 4 - QUANTIZED (SMALLER + FASTER, MINOR QUALITY LOSS)
+-------------------------------------------------------------------------------
+
+  Quantized models pack the same weights into fewer bits per number. The
+  result is a much smaller file, less VRAM, and FASTER inference -- because
+  GPUs are usually memory-bandwidth-bound, less data to move = more speed.
+  Quality loss is small (q8_0 ~ identical, q5_0 ~ 95-98%, q4_0 ~ 90%).
+
+  Pick the HIGHEST quantization (q8_0 > q5_0 > q4_0) your VRAM can fit.
+
+ggml-large-v3-turbo-q8_0.bin                                          (~870 MB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo-q8_0.bin
+  Quality:  Effectively indistinguishable from full-precision turbo.
+  Speed:    ~10-20% faster than full turbo on most GPUs.
+  When:     SWEET SPOT for 4-6 GB GPUs. Use this instead of full turbo if
+            you have a smaller VRAM card -- you lose almost nothing.
+
+ggml-large-v3-turbo-q5_0.bin                                          (~574 MB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo-q5_0.bin
+  Quality:  ~95% of full-precision turbo.
+  When:     Tight on VRAM (2-4 GB GPU) and still want turbo accuracy.
+
+ggml-large-v3-q8_0.bin                                                (~1.7 GB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-q8_0.bin
+  Quality:  Effectively identical to full large-v3.
+  Speed:    Noticeably faster than full large-v3 on consumer GPUs.
+  When:     BEST PICK for 6-10 GB GPUs. You get nearly the maximum
+            accuracy whisper offers without needing the full 3.1 GB.
+
+ggml-large-v3-q5_0.bin                                                (~1.1 GB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-q5_0.bin
+  When:     Want large-v3 quality and the q8_0 still doesn't fit.
+
+ggml-large-v2-q8_0.bin                                                (~1.7 GB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v2-q8_0.bin
+  When:     Some niche languages and accents do better on v2 than v3.
+            Try this if v3 has weirdly bad output on your specific song.
+
+ggml-large-v2-q5_0.bin                                                (~1.1 GB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v2-q5_0.bin
+
+ggml-medium-q8_0.bin                                                  (~810 MB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium-q8_0.bin
+  Quality:  Near-identical to full medium.
+  When:     Solid pick for ~2 GB GPUs that can't fit the large family.
+
+ggml-medium-q5_0.bin                                                  (~514 MB)
+  Download: https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium-q5_0.bin
+  When:     Even tighter VRAM than medium-q8.
+
+-------------------------------------------------------------------------------
+  PICK BY GPU VRAM (recommended for the best accuracy AT speed)
+-------------------------------------------------------------------------------
+
+  No GPU (CPU only) -> ggml-small.bin or ggml-medium-q5_0.bin
+                       (anything bigger will be brutally slow)
+
+  2 GB VRAM         -> ggml-large-v3-turbo-q5_0.bin
+  4 GB VRAM         -> ggml-large-v3-turbo-q8_0.bin    *** SWEET SPOT
+  6 GB VRAM         -> ggml-large-v3-turbo.bin   or   ggml-large-v3-q5_0.bin
+  8 GB VRAM         -> ggml-large-v3-q8_0.bin          *** BEST QUALITY/SPEED
+  10-12 GB VRAM     -> ggml-large-v3.bin (full)
+  16+ GB VRAM       -> ggml-large-v3.bin + crank Beam=8, Best-of=8, Refine=6
+
+  Rule of thumb: take the biggest model that fits, in the HIGHEST
+  quantization that fits. q8_0 is virtually lossless; q5_0 costs ~2-5%
+  accuracy; q4_0 costs more -- skip q4 unless you really have to.
+
+-------------------------------------------------------------------------------
+  PICK BY USE CASE
+-------------------------------------------------------------------------------
+
+For the impatient -> ggml-tiny.bin                  ("Lazy" preset)
+For drafts        -> ggml-small.bin                 ("Low" preset)
+For most jobs     -> ggml-large-v3-turbo.bin        ("Medium"/"High" preset) *
+For final keepers -> ggml-large-v3.bin              ("Perfect" preset)
+Tight on disk?    -> any of the q5_0 / q8_0 quantized versions above
+
+* If you only download one model, make it ggml-large-v3-turbo.bin.
+
+-------------------------------------------------------------------------------
+  HOW TO ACTUALLY USE MORE GPU FOR BETTER RESULTS
+-------------------------------------------------------------------------------
+
+  Once you have a model that fits, these knobs in the UI use ADDITIONAL
+  VRAM and compute for higher accuracy:
+
+  1. BEAM SIZE -- biggest accuracy lever
+     beam=1  greedy (fastest, lowest accuracy)
+     beam=5  ~5x slower, noticeably better, typical "high quality"
+     beam=8  ~8x slower, marginal extra gain, only worth it on big GPUs
+
+  2. BEST-OF -- backup retries for confused sections
+     Only kicks in when Beam=1 and the model hits low-confidence
+     segments. Crank Beam instead if you have the VRAM.
+
+  3. REFINEMENT PASSES -- multi-window re-decoding for tight word timing
+     Doesn't use much extra VRAM (one window at a time) but linearly
+     adds runtime. Worth 3-6 passes on a fast GPU.
+
+  4. FORCED ALIGNMENT (paste your own lyrics)
+     If you have the actual lyrics from somewhere, paste them in the
+     LYRICS box. The pipeline still uses whisper to get TIMING but
+     outputs YOUR text. This is way more accurate than relying on
+     whisper to hear lyrics through music. Single biggest accuracy win.
+
+  5. MULTIPLE PASSES WITH DIFFERENT MODELS (manual)
+     Run once with large-v3, save .lrc. Run again with large-v3-turbo,
+     save another. Diff them -- words both models agree on are almost
+     certainly right; disagreements need a human look.
+
+-------------------------------------------------------------------------------
+  HOW LANGUAGE-SPECIFIC MODELS WORK
+-------------------------------------------------------------------------------
+
+The ".en" suffix (e.g. ggml-medium.en.bin) means the model was trained
+ONLY on English. They're smaller, faster, and a bit more accurate on
+English than their multilingual counterparts.
+
+- Use the .en variant if the song is definitely English.
+- Use the regular variant for any other language or mixed-language songs.
+- "large-v3" and "large-v3-turbo" do NOT have .en variants because the
+  full multilingual large models are already great on English.
+
+-------------------------------------------------------------------------------
+  WHY ARE SOME MODELS FASTER ON THE SAME HARDWARE?
+-------------------------------------------------------------------------------
+
+  - Smaller models  = fewer parameters = less arithmetic per second of audio.
+  - Quantized (q5_0, q8_0) = same number of params but stored in lower
+    precision = less memory bandwidth = noticeably faster on most GPUs.
+  - large-v3-turbo specifically was distilled with fewer decoder layers
+    than full large-v3, so it's roughly 4x faster at near-equal accuracy.
