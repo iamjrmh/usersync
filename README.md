@@ -1,11 +1,22 @@
-# usersync — User Guide
+# usersync - User Guide
 
 Word-accurate lyric sync. Paste your lyrics, point it at the audio file,
 get back a precisely-timed `.lrc` with per-word timestamps.
 
 > **This guide is for using the prebuilt app.** Nothing here compiles
-> anything — you've got the `.exe` already, this just walks you through
+> anything - you've got the `.exe` already, this just walks you through
 > first-time setup and how to drive it.
+
+---
+
+## 0. Download usersync
+
+Grab the latest release from:
+
+<https://github.com/iamjrmh/usersync/releases/latest>
+
+Unzip anywhere you like. The rest of this guide assumes you're working
+inside that unzipped folder.
 
 ---
 
@@ -30,7 +41,7 @@ needs into a self-contained `python_env\` folder right next to the
 - PyTorch 2.8.0 (CUDA 12.6 for NVIDIA GPUs)
 - WhisperX, faster-whisper, Demucs, soundfile
 
-~5 GB download, ~10–20 min depending on your connection.
+~5 GB download, ~10-20 min depending on your connection.
 
 ## 3. Download a model
 
@@ -60,9 +71,9 @@ the model. Then you're ready to launch.
 
 | Exe | When |
 |---|---|
-| `usersync_cuda.exe` | NVIDIA GPU — fastest |
+| `usersync_cuda.exe` | NVIDIA GPU - fastest |
 | `usersync_vulkan.exe` | AMD / Intel / NVIDIA via Vulkan |
-| `usersync_cpu.exe` | No GPU — works anywhere, slow on long songs |
+| `usersync_cpu.exe` | No GPU - works anywhere, slow on long songs |
 
 Double-click to launch.
 
@@ -70,17 +81,17 @@ Double-click to launch.
 
 ## Using it
 
-1. **Setup** tab — pick the audio file and an output `.lrc` path.
+1. **Setup** tab - pick the audio file and an output `.lrc` path.
 2. **Lyrics** tab:
    - Check **Use my lyrics (forced alignment)**
    - Check **Use WhisperX (Python, wav2vec2)**
    - Check **Split vocals (Demucs)**
    - Paste the song's lyrics, one line per `.lrc` line
 3. Click **GENERATE .LRC** in the footer.
-4. Watch the **Log** tab — Demucs isolates vocals, whisper transcribes
+4. Watch the **Log** tab - Demucs isolates vocals, whisper transcribes
    the clean vocals line by line, then per-word forced alignment runs.
 5. Optional: open the **Editor** tab when it's done, click **Pull from
-   current job**, nudge any individual word with the ±10ms / ±50ms
+   current job**, nudge any individual word with the +/- 10ms / 50ms
    buttons, then **Save edited .lrc**.
 
 Output works in Lyricify, MusicBee, Salt Player, and any modern LRC
@@ -93,16 +104,16 @@ viewer that supports enhanced `<mm:ss.xx>` per-word timing.
 | Symptom | Fix |
 |---|---|
 | `WhisperX not installed` in the Lyrics tab | Run `setup_whisperx.bat`, then click `recheck` |
-| `Compiled backend: CPU only` and you have a GPU | You launched `usersync_cpu.exe` — use `usersync_cuda.exe` or `_vulkan.exe` instead |
-| Transcription is slow on a fast GPU | Your venv's PyTorch is the CPU build. Re-run `setup_whisperx.bat` — it now pins the CUDA wheels |
+| `Compiled backend: CPU only` and you have a GPU | You launched `usersync_cpu.exe` - use `usersync_cuda.exe` or `_vulkan.exe` instead |
+| Transcription is slow on a fast GPU | Your venv's PyTorch is the CPU build. Re-run `setup_whisperx.bat` - it now pins the CUDA wheels |
 | `demucs not installed` or `torchaudio: no backend` | Re-run `setup_whisperx.bat` (older versions skipped these) |
-| Anything weird | Open the **Log** tab → click **Export...** to save the full log to a `.txt`, then read it. `diagnose.bat` also dumps your full environment state |
+| Anything weird | Open the **Log** tab, click **Export...** to save the full log to a `.txt`, then read it. `diagnose.bat` also dumps your full environment state |
 
 ---
 
 ## Output format
 
-Enhanced LRC — `[mm:ss.xx]` per line, `<mm:ss.xx>` per word.
+Enhanced LRC - `[mm:ss.xx]` per line, `<mm:ss.xx>` per word.
 
 ```
 [ti:Song Title]
