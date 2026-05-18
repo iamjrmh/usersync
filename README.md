@@ -56,9 +56,12 @@ The Python env, models, and config persist between launches. Updating to a new r
    - Paste the song's lyrics, one line per `.lrc` line
 3. Click **GENERATE .LRC** in the footer.
 4. Open the **Log** tab to watch it work - Demucs isolating vocals, whisper transcribing line-by-line, per-word matches scrolling by.
-5. Optional: **Editor** tab when it's done. **Pull from current job**, nudge any individual word with the +/- 10ms / 50ms buttons, **Save edited .lrc**.
+5. **Editor** tab when it's done. **Pull from current job**, scroll through with each line's expand arrow, nudge any individual word with the +/- 10ms / 50ms buttons, **Save edited .lrc**.
 
 Output works in Lyricify, MusicBee, Salt Player, and any modern LRC viewer that supports enhanced `<mm:ss.xx>` per-word timing - and in [usergram](https://github.com/iamjrmh/usergram) for animated captions.
+
+> **Always do a pass in the Editor before shipping the .lrc.**
+> Automated alignment is impressive but never perfect - whisper mishears the occasional word, ad-libs and breath sounds confuse the boundary detector, and overlapping vocals get merged. Even with the Split tab cleaning up the vocals first, expect to nudge maybe 5-15% of words by a few hundred milliseconds. The Editor is built for exactly this: collapse the lines you're happy with, expand the rough ones, hit the play `>` button on a word to jump there, nudge with `+/- 10ms` until it lines up. The result is the difference between "kinda synced" and "actually shippable".
 
 ## Features
 
