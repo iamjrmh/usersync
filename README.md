@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/iamjrmh/CHSuite/refs/heads/main/JURMRWEED.png" alt="usersync" width="120" />
+<img src="https://raw.githubusercontent.com/iamjrmh/usersync/refs/heads/main/JURMRWEED.png" alt="usersync" width="120" />
 
 # usersync
 
